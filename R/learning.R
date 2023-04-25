@@ -17,3 +17,5 @@ mean(2:8)
 # Loading packages --------------------------------------------------------
 
 library(tidyverse)
+
+#tjekker git 2 learning
