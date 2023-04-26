@@ -1,26 +1,71 @@
-# Basics of R -------------------------------------------------------------
-
-colnames(airquality)
-
-str(airquality)
-
-summary(airquality)
-
-1 + 1
-
-mean(2:6)
-mean(2:7)
-mean(2:7)
-mean(2:8)
-
-
-# Loading packages --------------------------------------------------------
+#Load packages
 
 library(tidyverse)
+library(NHANES)
 
-#men her skriver jeg sådan istedet!
-#tjekker git 2 learning
-library(usethis)
-usethis::create_github_token()
 
-gitcreds::gitcreds_set()
+#Looking at data; NHANES er et datasæt der ligger i en pakke man kan bruge.
+glimpse(NHANES)
+
+# Selecting columns
+
+select(NHANES, Age)
+
+select(NHANES, Age, Weight, BMI)
+
+select(NHANES, -HeadCirc)
+
+select(NHANES, starts_with("BP"))
+
+select(NHANES, ends_with("Day"))
+
+select(NHANES, contains("Age"))
+
+
+#Nu vil vi danne et datasæt og ikke bare se det, men gemme det til brug:
+#Create smaller NHANES datasæt
+nhanes_small <- select(NHANES, Age, Gender, BMI, Diabetes,
+       PhysActive, BPSysAve, BPDiaAve, Education)
+
+
+# Renaming columns
+nhanes_small <- rename_with(nhanes_small,
+                            snakecase::to_snake_case)
+
+# Renaming specific columns
+
+nhanes_small <- rename(nhanes_small, sex = gender)
+
+#så skal vi til at pippe!! :) ctrl shift m = pipen
+
+colnames(nhanes_small)
+
+nhanes_small %>%
+    colnames()
+
+nhanes_small %>%
+    select(phys_active) %>%
+    rename(physically_active = phys_active)
+
+#opgave 7.8
+#1
+nhanes_small %>%
+    select(bp_sys_ave, education)
+
+#2
+nhanes_small %>%
+    rename(bp_sys = bp_sys_ave,
+           bp_dia = bp_dia_ave)
+#3
+nhanes_small %>%
+    select(bmi,contains("age"))
+
+#4
+
+blood_pressure <- select(nhanes_small, starts_with("bp_"))
+rename(blood_pressure, bp_systolic = bp_sys_ave)
+#rewrite:
+
+nhanes_small %>%
+    select(starts_with("bp_")) %>%
+    rename(bp_systolic = bp_sys_ave)
