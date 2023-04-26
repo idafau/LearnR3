@@ -69,3 +69,23 @@ rename(blood_pressure, bp_systolic = bp_sys_ave)
 nhanes_small %>%
     select(starts_with("bp_")) %>%
     rename(bp_systolic = bp_sys_ave)
+
+
+# Filtering (nu blir det spændende, dplyr, 7.9)
+nhanes_small %>%
+    filter(phys_active == "No")
+#filter alle med bmi 25
+nhanes_small %>%
+    filter(bmi == 25)
+
+# filter alle med bmi 25 eller over ! OBS bemærk rækkefølge >=
+nhanes_small %>%
+    filter(bmi >= 25)
+
+#combining logical operators
+
+nhanes_small %>%
+    filter(bmi >= 25 & phys_active == "No")
+
+nhanes_small %>%
+    filter(bmi >= 25 | phys_active == "No")
