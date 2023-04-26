@@ -162,4 +162,9 @@ nhanes_small %>%
 readr::write_csv(nhanes_small,
                  here::here("data/nhance_small.csv"))
 
+# nyt datasæt hente 7.17-------------------------------------------------------
+
+
+nhanes_small <- readr::read_csv(here::here("data/nhanes_small.csv")
+
 
