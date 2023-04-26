@@ -1,5 +1,4 @@
-Ida 
-Pilonidal sygdom 
+Ida tralala sygdom 
 
 added this sentence locally nu
 tjekker nu rettelser i skyen
