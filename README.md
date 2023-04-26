@@ -2,6 +2,7 @@ Ida
 Pilonidal sygdom 
 
 added this sentence locally nu
+tjekker nu rettelser i skyen
 #tjekking git commiting
 
 TODO: Add more to the title of your project here
