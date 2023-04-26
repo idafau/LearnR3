@@ -17,7 +17,7 @@ mean(2:8)
 # Loading packages --------------------------------------------------------
 
 library(tidyverse)
-
+#men her skriver jeg sådan istedet!
 #tjekker git 2 learning
 library(usethis)
 usethis::create_github_token()
