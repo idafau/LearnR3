@@ -19,3 +19,7 @@ mean(2:8)
 library(tidyverse)
 
 #tjekker git 2 learning
+library(usethis)
+usethis::create_github_token()
+
+gitcreds::gitcreds_set()
