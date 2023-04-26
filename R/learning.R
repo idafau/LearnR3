@@ -142,4 +142,24 @@ nhanes_modified <- nhanes_small %>% # Specifying dataset
 nhanes_modified
 
 
+# creating summary statistics, 7.14 ---------------------------------------
+
+nhanes_small %>%
+    summarise(max_bmi = max(bmi, na.rm = TRUE),
+              min_bmi = min (bmi, na.rm = TRUE))
+#na.rm = TRUE, siger slet missing values, ellers virker funktionen ikke
+
+#men kan vi se på bmi i grupper ?
+
+nhanes_small %>%
+    filter(!is.na(diabetes)) %>% #ikke (!) missing i diabetes, dvs na i diabetes filtres fra
+    group_by(diabetes) %>%
+    summarise(mean_age = mean(age, na.rm = TRUE),
+              mean_bmi = mean(bmi, na.rm = TRUE)) %>%
+    ungroup() #sikre vi ophæver grupperne
+
+#saving data 7.16:
+readr::write_csv(nhanes_small,
+                 here::here("data/nhance_small.csv"))
+
 
