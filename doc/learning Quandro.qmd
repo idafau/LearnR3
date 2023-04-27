@@ -213,3 +213,72 @@ nhanes_small %>%
   ggplot(aes(x = diabetes, y = bmi)) +
   geom_violin(na.rm = TRUE)
 ```
+
+
+## Exercise to make plots with one or two variables 9.5
+1
+```{r}
+library(NHANES)
+nhanes_exercise <- NHANES %>%
+  rename_with(snakecase::to_snake_case) %>%
+  rename(sex = gender)
+```
+
+
+```{r}
+#| label: fig-age-diabetes-age
+#| fig-cap: "Age and age at diabetes diagnosis"
+#| fig-subcap:
+#|   - "Age"
+#|   - "Age at diabetes diagnosis"
+#| layout-ncol: 2
+
+# Distribution of age
+ggplot(nhanes_exercise, aes(x = age)) +
+  geom_histogram(na.rm = TRUE)
+
+# Distribution of age at diabetes diagnosis
+ggplot(nhanes_exercise, aes(x = diabetes_age)) +
+  geom_histogram(na.rm = TRUE)
+```
+2) 
+With the nhanes_exercise data, use geom_density() to show the distribution of age (participant’s age at collection) and diabetes_age (age of diabetes diagnosis) in two separate, side-by-side plots, but inside one code chunk. Use #| layout-ncol, along with #| label, #| fig-cap and #| fig-subcap, to have the two plots be side by side. Don’t forget to use na.rm = TRUE in the geom.
+
+```{r}
+#| label: fig-age-age-diabetes-density
+#| fig-cap: age and age diabetes density plot
+#| layout-ncol: 2
+#| sub-cap: 
+#|   - "age"
+#|   - "age diabetes"
+
+# Distribution of age
+ggplot(nhanes_exercise, aes(x = age)) +
+    geom_density(na.rm = TRUE)
+
+# Distribution of age at diabetes diagnosis
+ggplot(nhanes_exercise, aes(x = diabetes_age)) +
+    geom_density(na.rm = TRUE)
+```
+
+
+###Plotting three or more variables
+
+```{r}
+#PLot systolic blood pressure in relation to educational status and diabetes. 
+
+nhanes_small %>% 
+    filter(!is.na(diabetes), !is.na(education)) %>% 
+    ggplot(aes(x = education, y = bp_sys_ave, colour = diabetes)) + 
+    geom_boxplot(na.rm=TRUE)
+```
+## tre continuous data: 
+
+```{r}
+#plotting bmi in relation til sys bp and age
+
+nhanes_small %>% 
+    ggplot(aes(x = bmi, y = bp_sys_ave, color = age))+ 
+    geom_point(na.rm = TRUE)
+```
+
