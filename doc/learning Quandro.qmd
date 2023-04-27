@@ -157,3 +157,59 @@ nhanes_small %>%
   ggplot(aes(x = education)) +
   geom_bar()
 ```
+
+###PLotter 2 continuous variables
+geom hex: erstatter scatter
+geom_point: scatter
+
+
+###Plotting two variables: 
+```{r}
+ggplot(nhanes_small, aes(x = bmi, y = bp_sys_ave)) +
+  geom_hex(na.rm = TRUE)
+1
+```
+
+vi kan tilføje en regressionslinie, så vi kan se sammenhængen mellem de to:
+
+```{r}
+# adding a smoothing line
+
+ggplot(nhanes_small, aes(x = bmi, y = bp_sys_ave)) +
+  geom_hex(na.rm = TRUE) +
+  geom_smooth(nr.rm = TRUE)
+```
+
+
+##9.4.2 Two discrete variables
+
+```{r}
+# Two categorical variables
+
+nhanes_small %>%
+  filter(!is.na(education), !is.na(diabetes)) %>%
+  ggplot(aes(x = diabetes, fill = education)) +
+  geom_bar()
+```
+
+
+```{r}
+# two categorical variable, side by side istedet for stacked
+# "dodged" bar plot
+
+nhanes_small %>%
+  filter(!is.na(diabetes), !is.na(education)) %>%
+  ggplot(aes(x = diabetes, fill = education)) +
+  geom_bar(position = position_dodge())
+```
+
+
+### 9.4.3 Discrete and continuous variables
+
+```{r}
+# Using mixed data
+nhanes_small %>%
+  filter(!is.na(diabetes), bmi <= 60) %>%
+  ggplot(aes(x = diabetes, y = bmi)) +
+  geom_violin(na.rm = TRUE)
+```
